@@ -192,7 +192,7 @@ int main( int argc, char **argv )
             throw Win32Error( "CloseHandle", ::GetLastError() );
         }
 
-        return 0;
+        return exitCode;
     } catch ( const Win32Error &e ) {
         /* The MSDN documentation for FormatMessage says that the buf cannot
          * be larger than 64K bytes.
