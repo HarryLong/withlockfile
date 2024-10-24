@@ -127,10 +127,11 @@ int main( int argc, char **argv )
 
         PROCESS_INFORMATION pi = { 0 };
 
-        STARTUPINFO si = { sizeof( si ) };
-        si.hStdError = ::GetStdHandle( STD_ERROR_HANDLE );
-        si.hStdOutput = ::GetStdHandle( STD_OUTPUT_HANDLE );
-        si.hStdInput = ::GetStdHandle( STD_INPUT_HANDLE );
+        STARTUPINFOA sia = { sizeof(sia)};
+        sia.hStdError = ::GetStdHandle(STD_ERROR_HANDLE);
+        sia.hStdOutput = ::GetStdHandle(STD_OUTPUT_HANDLE);
+        sia.hStdInput = ::GetStdHandle(STD_INPUT_HANDLE);
+
 
         if ( ::CreateProcessA( executable.c_str(),
                                const_cast<char *>( commandLine.c_str() ),
@@ -140,7 +141,7 @@ int main( int argc, char **argv )
                                CREATE_SUSPENDED,
                                NULL,
                                NULL,
-                               &si,
+                               &sia,
                                &pi ) == FALSE ) {
             throw Win32Error( "CreateProcessA", ::GetLastError() );
         }
